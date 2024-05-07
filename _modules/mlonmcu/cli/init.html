@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mlonmcu.cli.init &mdash; ML on MCU 0.1.0 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <title>mlonmcu.cli.init &mdash; ML on MCU 0.4.dev0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=414d5694"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -24,14 +27,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> ML on MCU
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ML on MCU
           </a>
               <div class="version">
-                0.1.0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -44,7 +51,9 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Important Terms and Design Decisions (RFC)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../components.html#components-in-detail">Components in Detail</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../postprocess.html">Postprocesses</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../logging.html">Logging and Verbosity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../docs.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
@@ -65,9 +74,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>mlonmcu.cli.init</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">mlonmcu.cli.init</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -97,19 +106,17 @@
 <span class="c1">#</span>
 <span class="sd">&quot;&quot;&quot;Command line subcommand for initializing a mlonmcu environment.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pkg_resources</span>
-<span class="kn">import</span> <span class="nn">pkgutil</span>
-<span class="kn">import</span> <span class="nn">jinja2</span>
 
 <span class="kn">from</span> <span class="nn">mlonmcu.environment.templates</span> <span class="kn">import</span> <span class="n">get_template_names</span>
-<span class="kn">from</span> <span class="nn">mlonmcu.environment.config</span> <span class="kn">import</span> <span class="n">get_environments_dir</span><span class="p">,</span> <span class="n">DEFAULTS</span><span class="p">,</span> <span class="n">env_subdirs</span>
-<span class="kn">from</span> <span class="nn">mlonmcu.utils</span> <span class="kn">import</span> <span class="n">in_virtualenv</span>
+<span class="kn">from</span> <span class="nn">mlonmcu.environment.config</span> <span class="kn">import</span> <span class="n">get_environments_dir</span><span class="p">,</span> <span class="n">DEFAULTS</span>
 <span class="kn">from</span> <span class="nn">mlonmcu.environment.init</span> <span class="kn">import</span> <span class="n">initialize_environment</span>
+<span class="kn">from</span> <span class="nn">.helper.parse</span> <span class="kn">import</span> <span class="n">extract_config</span>
 
 
-<div class="viewcode-block" id="add_init_options"><a class="viewcode-back" href="../../../mlonmcu.cli.html#mlonmcu.cli.init.add_init_options">[docs]</a><span class="k">def</span> <span class="nf">add_init_options</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
+<div class="viewcode-block" id="add_init_options">
+<a class="viewcode-back" href="../../../mlonmcu.cli.html#mlonmcu.cli.init.add_init_options">[docs]</a>
+<span class="k">def</span> <span class="nf">add_init_options</span><span class="p">(</span><span class="n">parser</span><span class="p">):</span>
     <span class="n">init_parser</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_argument_group</span><span class="p">(</span><span class="s2">&quot;init options&quot;</span><span class="p">)</span>
     <span class="n">init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;-n&quot;</span><span class="p">,</span>
@@ -126,9 +133,11 @@
         <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;TEMPLATE&quot;</span><span class="p">,</span>
         <span class="n">nargs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-        <span class="n">choices</span><span class="o">=</span><span class="n">get_template_names</span><span class="p">(),</span>
+        <span class="c1"># choices=get_template_names(),</span>
         <span class="n">default</span><span class="o">=</span><span class="n">DEFAULTS</span><span class="p">[</span><span class="s2">&quot;template&quot;</span><span class="p">],</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Environment template (default: </span><span class="si">%(default)s</span><span class="s2">, allowed: </span><span class="si">%(choices)s</span><span class="s2">)&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Environment template name or path (default: </span><span class="si">%(default)s</span><span class="s2">, available: &quot;</span>
+        <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">get_template_names</span><span class="p">())</span>
+        <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;DIR&quot;</span><span class="p">,</span>
@@ -157,13 +166,6 @@
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Clone models directory into environment&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;--skip-sw&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;skip_sw&quot;</span><span class="p">,</span>
-        <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
-        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Clone sw directory into environment&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
         <span class="s2">&quot;--register&quot;</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
@@ -175,31 +177,54 @@
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store_true&quot;</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Allow overwriting an existing environment directory&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">init_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-c&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--config&quot;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s2">&quot;KEY=VALUE&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
+        <span class="n">action</span><span class="o">=</span><span class="s2">&quot;append&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">&quot;Set a number of key-value pairs &quot;</span>
+            <span class="s2">&quot;(do not put spaces before or after the = sign). &quot;</span>
+            <span class="s2">&quot;If a value contains spaces, you should define &quot;</span>
+            <span class="s2">&quot;it with double quotes: &quot;</span>
+            <span class="s1">&#39;foo=&quot;this is a sentence&quot;. Note that &#39;</span>
+            <span class="s2">&quot;values are always treated as strings.&quot;</span>
+        <span class="p">),</span>
     <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_parser"><a class="viewcode-back" href="../../../mlonmcu.cli.html#mlonmcu.cli.init.get_parser">[docs]</a><span class="k">def</span> <span class="nf">get_parser</span><span class="p">(</span><span class="n">subparsers</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; &quot;Define and return a subparser for the init subcommand.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="get_parser">
+<a class="viewcode-back" href="../../../mlonmcu.cli.html#mlonmcu.cli.init.get_parser">[docs]</a>
+<span class="k">def</span> <span class="nf">get_parser</span><span class="p">(</span><span class="n">subparsers</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; &quot;Define and return a subparser for the init subcommand.&quot;&quot;&quot;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;init&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Initialize ML on MCU environment.&quot;</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">handle</span><span class="p">)</span>
     <span class="n">add_init_options</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">parser</span></div>
 
 
-<div class="viewcode-block" id="handle"><a class="viewcode-back" href="../../../mlonmcu.cli.html#mlonmcu.cli.init.handle">[docs]</a><span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Callback function which will be called to process the init subcommand&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="handle">
+<a class="viewcode-back" href="../../../mlonmcu.cli.html#mlonmcu.cli.init.handle">[docs]</a>
+<span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Callback function which will be called to process the init subcommand&quot;&quot;&quot;</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">config</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">extract_config</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
     <span class="n">initialize_environment</span><span class="p">(</span>
         <span class="n">args</span><span class="o">.</span><span class="n">DIR</span><span class="p">,</span>
         <span class="n">name</span><span class="p">,</span>
         <span class="n">create_venv</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">venv</span><span class="p">,</span>
         <span class="n">interactive</span><span class="o">=</span><span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">non_interactive</span><span class="p">,</span>
         <span class="n">clone_models</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">clone_models</span><span class="p">,</span>
-        <span class="n">skip_sw</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">skip_sw</span><span class="p">,</span>
         <span class="n">register</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">register</span><span class="p">,</span>
         <span class="n">template</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">template</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">template</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="n">args</span><span class="o">.</span><span class="n">template</span><span class="p">,</span>
         <span class="n">allow_exists</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">allow_exists</span><span class="p">,</span>
+        <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span>
     <span class="p">)</span></div>
+
 </pre></div>
 
            </div>

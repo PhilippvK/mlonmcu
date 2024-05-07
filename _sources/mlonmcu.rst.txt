@@ -8,7 +8,7 @@ Subpackages
    :maxdepth: 4
 
    mlonmcu.cli
-   mlonmcu.data
+   mlonmcu.context
    mlonmcu.environment
    mlonmcu.feature
    mlonmcu.flow
@@ -17,6 +17,7 @@ Subpackages
    mlonmcu.session
    mlonmcu.setup
    mlonmcu.target
+   mlonmcu.testing
 
 Submodules
 ----------
@@ -37,14 +38,6 @@ mlonmcu.config module
    :undoc-members:
    :show-inheritance:
 
-mlonmcu.context module
-----------------------
-
-.. automodule:: mlonmcu.context
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 mlonmcu.logging module
 ----------------------
 
@@ -61,10 +54,26 @@ mlonmcu.mlonmcu module
    :undoc-members:
    :show-inheritance:
 
+mlonmcu.plugins module
+----------------------
+
+.. automodule:: mlonmcu.plugins
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 mlonmcu.report module
 ---------------------
 
 .. automodule:: mlonmcu.report
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mlonmcu.timeout module
+----------------------
+
+.. automodule:: mlonmcu.timeout
    :members:
    :undoc-members:
    :show-inheritance:

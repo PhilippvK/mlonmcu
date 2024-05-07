@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Environments &mdash; ML on MCU 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Environments &mdash; ML on MCU 0.4.dev0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=414d5694"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Logging and Verbosity" href="logging.html" />
-    <link rel="prev" title="Components" href="components.html" /> 
+    <link rel="next" title="Postprocesses" href="postprocess.html" />
+    <link rel="prev" title="Auto-Vectorize Feature" href="components/auto_vectorize.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -27,14 +30,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> ML on MCU
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ML on MCU
           </a>
               <div class="version">
-                0.1.0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -47,6 +54,7 @@
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Important Terms and Design Decisions (RFC)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html#components-in-detail">Components in Detail</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Environments</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#environment-yml-explained"><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> Explained</a></li>
@@ -64,6 +72,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#environment-registry">Environment registry</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="postprocess.html">Postprocesses</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Logging and Verbosity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -84,8 +93,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Environments</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Environments</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/environments.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -95,80 +104,80 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="environments">
-<h1>Environments<a class="headerlink" href="#environments" title="Permalink to this headline"></a></h1>
+  <section id="environments">
+<h1>Environments<a class="headerlink" href="#environments" title="Link to this heading"></a></h1>
 <section id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline"></a></h2>
+<h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading"></a></h2>
 <p>While the base set of features in MLonMCU should work out of the box, there are some reasons for not sticking to predefined default values. Instead of hardcoding values such as repository urls or file paths inside the codebase, they can be completely configured by the user to allow setting up custom environments with very low efforts required. Having multiple MLonMCU environments installed in parallel has further advantages as they are completely isolated from each other an therefore allow using different versions of components and a different set of features. In addition there is a possibility to turn of certain components completely to reduce the installation time. User configuration for the MLonMCU flow which would typically need to be passed via the command line can be instead defined in the environment file which going to be explained next.</p>
 </section>
 <section id="environment-yml-explained">
-<h2><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> Explained<a class="headerlink" href="#environment-yml-explained" title="Permalink to this headline"></a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> Explained<a class="headerlink" href="#environment-yml-explained" title="Link to this heading"></a></h2>
 <p>Each MLonMCU environment has a unique directory which can be chosen by the user where dependencies are installed and exports are written to. In this directory which can also be referred as MLonMCU-Home the environment configuration file <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> can be found. The basic structure of this YAML file can be summarized as follows:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># The MLONMCU_HOME is filled in automatically when creating the environment</span><span class="w"></span>
-<span class="nt">home</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">home_dir</span><span class="nv"> </span><span class="s">}}&quot;</span><span class="w"></span>
-<span class="nt">logging</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="c1"># Default locations for certain directoriescan be changed here</span><span class="w"></span>
-<span class="c1"># Non-absolute paths will always be threated relative to the MLONMCU_HOME</span><span class="w"></span>
-<span class="nt">paths</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">deps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deps</span><span class="w"></span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="c1"># Here default clone_urls</span><span class="w"></span>
-<span class="nt">repos</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">some_repo</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;insert_repo_url_here&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="nt">ref</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional_branch_tag_or_commit</span><span class="w"></span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># The MLONMCU_HOME is filled in automatically when creating the environment</span>
+<span class="nt">home</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{{</span><span class="nv"> </span><span class="s">home_dir</span><span class="nv"> </span><span class="s">}}&quot;</span>
+<span class="nt">logging</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="c1"># Default locations for certain directoriescan be changed here</span>
+<span class="c1"># Non-absolute paths will always be threated relative to the MLONMCU_HOME</span>
+<span class="nt">paths</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">deps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">deps</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="c1"># Here default clone_urls</span>
+<span class="nt">repos</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">some_repo</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;insert_repo_url_here&quot;</span>
+<span class="w">    </span><span class="nt">ref</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">optional_branch_tag_or_commit</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 
-<span class="c1"># Here all supported frameworks with their specific features are defined</span><span class="w"></span>
-<span class="c1"># Optionally disable unwanted or incomatible backends or features here</span><span class="w"></span>
-<span class="c1"># The configured defaults are used if no backend was specified in the command line options</span><span class="w"></span>
-<span class="nt">frameworks</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_framework</span><span class="w"></span>
-<span class="w">  </span><span class="nt">some_framework</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">    </span><span class="nt">backends</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_backend</span><span class="w"></span>
-<span class="w">      </span><span class="nt">some_backend</span><span class="p">:</span><span class="w"></span>
-<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">        </span><span class="nt">features</span><span class="p">:</span><span class="w"></span>
-<span class="w">          </span><span class="nt">some_feature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="w">    </span><span class="nt">features</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">another_feature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="c1"># The enabled fronends are processed in the order defined here until a compatible one is found for a given model type</span><span class="w"></span>
-<span class="nt">frontends</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">some_frontend</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">    </span><span class="nt">features</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">some_feature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="w">  </span><span class="nt">another_frontend</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"></span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="c1"># List of supported targets in the environment</span><span class="w"></span>
-<span class="nt">targets</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_target</span><span class="w"></span>
-<span class="w">  </span><span class="nt">some_target</span><span class="p">:</span><span class="w"></span>
-<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">    </span><span class="nt">features</span><span class="p">:</span><span class="w"></span>
-<span class="w">      </span><span class="nt">some_featuee</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span><span class="w"></span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span><span class="w"></span>
-<span class="c1"># This is where further options such as specific versions of dependencies can be set in the furture</span><span class="w"></span>
-<span class="nt">vars</span><span class="p">:</span><span class="w"></span>
-<span class="w">  </span><span class="nt">some_backend.some_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span><span class="w"></span>
-<span class="w">  </span><span class="nt">foo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bar&quot;</span><span class="w"></span>
+<span class="c1"># Here all supported frameworks with their specific features are defined</span>
+<span class="c1"># Optionally disable unwanted or incomatible backends or features here</span>
+<span class="c1"># The configured defaults are used if no backend was specified in the command line options</span>
+<span class="nt">frameworks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_framework</span>
+<span class="w">  </span><span class="nt">some_framework</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">backends</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_backend</span>
+<span class="w">      </span><span class="nt">some_backend</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">        </span><span class="nt">features</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">some_feature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">          </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">    </span><span class="nt">features</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">another_feature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="c1"># The enabled fronends are processed in the order defined here until a compatible one is found for a given model type</span>
+<span class="nt">frontends</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">some_frontend</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">features</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">some_feature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">  </span><span class="nt">another_frontend</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="c1"># List of supported targets in the environment</span>
+<span class="nt">targets</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">default</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">some_target</span>
+<span class="w">  </span><span class="nt">some_target</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">features</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">some_featuee</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="c1"># This is where further options such as specific versions of dependencies can be set in the furture</span>
+<span class="nt">vars</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">some_backend.some_var</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="w">  </span><span class="nt">foo</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bar&quot;</span>
 </pre></div>
 </div>
 <p>While some parts of the file can theoretically be omitted, it is not recommended to do do. Also it has to be noted, that frameworks, backends, targets, frontends and features need to be explicitly enabled in the environment file to be available in the MLonMCU flow.</p>
 <p><strong>Hint:</strong> The <code class="docutils literal notranslate"><span class="pre">default</span></code> property which is available for some components supports wildcards, e.g. instead of providing a single backend name just put in “*” to use all enabled backends of the given framework by default.</p>
 </section>
 <section id="environment-templates">
-<h2>Environment Templates<a class="headerlink" href="#environment-templates" title="Permalink to this headline"></a></h2>
+<h2>Environment Templates<a class="headerlink" href="#environment-templates" title="Link to this heading"></a></h2>
 <p>There is a set of environment file templates provided with the MLonMCU package which can be chosen from by the user e.g.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">default</span></code>: Should work out of the box for everyone</p></li>
@@ -179,9 +188,9 @@
 <p>After a template was chosen, the initial environment file is being generated which can be freely modified by the user afterwards.</p>
 </section>
 <section id="creating-environments">
-<h2>Creating environments<a class="headerlink" href="#creating-environments" title="Permalink to this headline"></a></h2>
+<h2>Creating environments<a class="headerlink" href="#creating-environments" title="Link to this heading"></a></h2>
 <section id="command-line-recommended">
-<h3>Command line (recommended)<a class="headerlink" href="#command-line-recommended" title="Permalink to this headline"></a></h3>
+<h3>Command line (recommended)<a class="headerlink" href="#command-line-recommended" title="Link to this heading"></a></h3>
 <p>To get started with MLonMCU on the command line first an environment has to be created using the <code class="docutils literal notranslate"><span class="pre">mlonmcu</span> <span class="pre">init</span></code> command. As only some usage examples are shown in the following, make sure to check out <code class="docutils literal notranslate"><span class="pre">mlonmcu</span> <span class="pre">init</span> <span class="pre">--help</span></code> to learn more.</p>
 <ul class="simple">
 <li><p>Initialize a default environment at the default location (<code class="docutils literal notranslate"><span class="pre">~/.config/mlonmcu/environments/default</span></code> on most UNIX Systems): <code class="docutils literal notranslate"><span class="pre">mlonmcu</span> <span class="pre">init</span></code></p></li>
@@ -190,14 +199,14 @@
 <p>The tool will ask some questions on the command line interactively.</p>
 </section>
 <section id="python-api">
-<h3>Python API<a class="headerlink" href="#python-api" title="Permalink to this headline"></a></h3>
+<h3>Python API<a class="headerlink" href="#python-api" title="Link to this heading"></a></h3>
 <p>At the moment please stick to the CLI tool!</p>
 </section>
 </section>
 <section id="using-environments">
-<h2>Using environments<a class="headerlink" href="#using-environments" title="Permalink to this headline"></a></h2>
+<h2>Using environments<a class="headerlink" href="#using-environments" title="Link to this heading"></a></h2>
 <section id="command-line">
-<h3>Command line<a class="headerlink" href="#command-line" title="Permalink to this headline"></a></h3>
+<h3>Command line<a class="headerlink" href="#command-line" title="Link to this heading"></a></h3>
 <p>Most of the <code class="docutils literal notranslate"><span class="pre">mlonmcu</span></code> subcommands need a MLonMCU environment to operate on. In some cases it can be resolved automatically however it is recommended to pass it explicitly by the user in either of the following ways:</p>
 <ul class="simple">
 <li><p>Point the <code class="docutils literal notranslate"><span class="pre">MLONMCU_HOME</span></code> environment variable to the environment directory which should be used.</p></li>
@@ -219,11 +228,12 @@
 </div>
 </section>
 <section id="id1">
-<h3>Python API<a class="headerlink" href="#id1" title="Permalink to this headline"></a></h3>
+<h3>Python API<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <p>For the best experience a MLonMCU environment should always we wrapped with a <code class="docutils literal notranslate"><span class="pre">MlonMcuContext</span></code> as it provides useful utilities and a locking mechanism which can ensure that only one instance of the environment can be requested at a time.</p>
 <p>The typical using using a Python <code class="docutils literal notranslate"><span class="pre">with</span></code> block looks as follows:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlonmcu.context</span>
-<span class="k">with</span> <span class="n">mlonmcu</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">MlonMcuContext</span><span class="p">()</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlonmcu.context.context</span> <span class="kn">import</span> <span class="n">MlonMcuContext</span>
+
+<span class="k">with</span> <span class="n">MlonMcuContext</span><span class="p">()</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
     <span class="k">pass</span>
 </pre></div>
 </div>
@@ -231,7 +241,7 @@
 </section>
 </section>
 <section id="environment-registry">
-<h2>Environment registry<a class="headerlink" href="#environment-registry" title="Permalink to this headline"></a></h2>
+<h2>Environment registry<a class="headerlink" href="#environment-registry" title="Link to this heading"></a></h2>
 <p>Optionally environment can be registered in the users home config directory with a given name which enabled referring to them without providing a file path. Use the <code class="docutils literal notranslate"><span class="pre">--register</span></code> and <code class="docutils literal notranslate"><span class="pre">--name</span></code> flags of the <code class="docutils literal notranslate"><span class="pre">mlonmcu</span> <span class="pre">init</span></code> command to do so. The command <code class="docutils literal notranslate"><span class="pre">mlonmcu</span> <span class="pre">env</span></code> provides useful utilities to list and modify existing entries in the registry file which is typically located at <code class="docutils literal notranslate"><span class="pre">~/.config/mlonmcu/environments.ini</span></code>.</p>
 </section>
 </section>
@@ -240,8 +250,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="components.html" class="btn btn-neutral float-left" title="Components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="logging.html" class="btn btn-neutral float-right" title="Logging and Verbosity" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="components/auto_vectorize.html" class="btn btn-neutral float-left" title="Auto-Vectorize Feature" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="postprocess.html" class="btn btn-neutral float-right" title="Postprocesses" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

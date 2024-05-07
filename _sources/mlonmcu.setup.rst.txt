@@ -1,6 +1,14 @@
 mlonmcu.setup package
 =====================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   mlonmcu.setup.tasks
+
 Submodules
 ----------
 
@@ -8,6 +16,14 @@ mlonmcu.setup.cache module
 --------------------------
 
 .. automodule:: mlonmcu.setup.cache
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+mlonmcu.setup.gen\_requirements module
+--------------------------------------
+
+.. automodule:: mlonmcu.setup.gen_requirements
    :members:
    :undoc-members:
    :show-inheritance:
@@ -24,14 +40,6 @@ mlonmcu.setup.task module
 -------------------------
 
 .. automodule:: mlonmcu.setup.task
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-mlonmcu.setup.tasks module
---------------------------
-
-.. automodule:: mlonmcu.setup.tasks
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ML on MCU &mdash; ML on MCU 0.1.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>ML on MCU &mdash; ML on MCU 0.4.dev0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=414d5694"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -27,14 +30,18 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> ML on MCU
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            ML on MCU
           </a>
               <div class="version">
-                0.1.0
+                0.4.dev0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -47,33 +54,28 @@
 <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting started</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#prerequisites">Prerequisites</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#ubuntu-debian">Ubuntu/Debian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-package-manually">Build Package manually</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#docker-any-other-os">Docker (Any other OS)</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#using-the-command-line">Using the command line</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#using-the-python-api">Using the Python API</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#important-terms">Important terms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#development">Development</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#future-work">Future Work</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#credits">Credits</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#developers">Developers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#other">Other</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#acknowledgment">Acknowledgment</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Important Terms and Design Decisions (RFC)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="components.html">Components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html#components-in-detail">Components in Detail</a></li>
 <li class="toctree-l1"><a class="reference internal" href="environments.html">Environments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="postprocess.html">Postprocesses</a></li>
 <li class="toctree-l1"><a class="reference internal" href="logging.html">Logging and Verbosity</a></li>
 <li class="toctree-l1"><a class="reference internal" href="docs.html">Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
@@ -94,8 +96,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>ML on MCU</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ML on MCU</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/readme.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -105,11 +107,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="ml-on-mcu">
-<h1>ML on MCU<a class="headerlink" href="#ml-on-mcu" title="Permalink to this headline"></a></h1>
+  <section id="ml-on-mcu">
+<h1>ML on MCU<a class="headerlink" href="#ml-on-mcu" title="Link to this heading"></a></h1>
 <p><a class="reference external" href="https://pypi.org/project/mlonmcu"><img alt="pypi package" src="https://badge.fury.io/py/mlonmcu.svg" /></a>
 <a class="reference external" href="https://mlonmcu.readthedocs.io/en/latest/?version=latest"><img alt="readthedocs" src="https://readthedocs.org/projects/mlonmcu/badge/?version=latest" /></a>
-<img alt="covergae" src="https://byob.yarr.is/tum-ei-eda/mlonmcu/coverage" />
+<img alt="coverage" src="https://byob.yarr.is/tum-ei-eda/mlonmcu/coverage" />
 <a class="reference external" href="https://github.com/tum-ei-eda/mlonmcu/blob/main/LICENSE"><img alt="GitHub license" src="https://img.shields.io/github/license/tum-ei-eda/mlonmcu.svg" /></a></p>
 <p><a class="reference external" href="https://github.com/tum-ei-eda/mlonmcu/actions/workflows/cicd.yml"><img alt="cicd workflow" src="https://github.com/tum-ei-eda/mlonmcu/actions/workflows/cicd.yml/badge.svg" /></a>
 <a class="reference external" href="https://github.com/tum-ei-eda/mlonmcu/actions/workflows/demo.yml"><img alt="demo workflow" src="https://github.com/tum-ei-eda/mlonmcu/actions/workflows/demo.yml/badge.svg" /></a>
@@ -118,63 +120,67 @@
 <p>This project contains research code related to the deployment of inference or learning applications on tiny micro-controllers.</p>
 <ul class="simple">
 <li><p>Free software: Apache License, Version 2.0</p></li>
-<li><p>Python Package: https://pypi.org/project/mlonmcu/</p></li>
-<li><p>Documentation: https://mlonmcu.readthedocs.io.</p></li>
+<li><p>Python Package: <a class="reference external" href="https://pypi.org/project/mlonmcu/">https://pypi.org/project/mlonmcu/</a></p></li>
+<li><p>Documentation: <a class="reference external" href="https://mlonmcu.readthedocs.io">https://mlonmcu.readthedocs.io</a> or <a class="reference external" href="https://tum-ei-eda.github.io/mlonmcu/">https://tum-ei-eda.github.io/mlonmcu/</a></p></li>
 </ul>
 <section id="features">
-<h2>Features<a class="headerlink" href="#features" title="Permalink to this headline"></a></h2>
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Highly configurable python package</p></li>
 <li><p>Automatic resolution and installation of dependencies</p></li>
-<li><p>Supporting a large combination of frameworks/backends/targets/features:</p>
-<ul>
-<li><p>Frameworks (Backenss): TFLite Micro, MircoTVM</p></li>
-<li><p>Targets: Host (x86), ETISS (Pulpino)</p></li>
-<li><p>Features: Autotuning (WIP), Debugging</p></li>
-</ul>
-</li>
+<li><p>Supporting a large combination of frameworks/backends/targets/features</p></li>
 <li><p>Build-in parallel processing of large number of benchmarks</p></li>
 <li><p>Isolated enironments (not interfering with other installations)</p></li>
 <li><p>Command Line and Python Development Interfaces</p></li>
-<li><p>WIP: Docker images to get started quickly</p></li>
+<li><p>Docker images to get started quickly</p></li>
 <li><p>Extensive documentation on usage and code details</p></li>
 <li><p>CI/CD integration and high PyTest coverage</p></li>
 </ul>
 </section>
 <section id="getting-started">
-<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline"></a></h2>
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
 <section id="prerequisites">
-<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline"></a></h3>
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
 <section id="ubuntu-debian">
-<h4>Ubuntu/Debian<a class="headerlink" href="#ubuntu-debian" title="Permalink to this headline"></a></h4>
+<h4>Ubuntu/Debian<a class="headerlink" href="#ubuntu-debian" title="Link to this heading"></a></h4>
 <p>First, a set of APT packages needs to be installed:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python related</span>
 <span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">venv</span>
 
 <span class="c1"># MLonMCU related</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">libboost</span><span class="o">-</span><span class="n">system</span><span class="o">-</span><span class="n">dev</span> <span class="n">libboost</span><span class="o">-</span><span class="n">filesystem</span><span class="o">-</span><span class="n">dev</span> <span class="n">libboost</span><span class="o">-</span><span class="n">program</span><span class="o">-</span><span class="n">options</span><span class="o">-</span><span class="n">dev</span> <span class="n">graphviz</span> <span class="n">doxygen</span> <span class="n">libtinfo</span><span class="o">-</span><span class="n">dev</span> <span class="n">zlib1g</span><span class="o">-</span><span class="n">dev</span> <span class="n">texinfo</span> <span class="n">unzip</span> <span class="n">device</span><span class="o">-</span><span class="n">tree</span><span class="o">-</span><span class="n">compiler</span> <span class="n">tree</span> <span class="n">g</span><span class="o">++</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">libboost</span><span class="o">-</span><span class="nb">all</span><span class="o">-</span><span class="n">dev</span> <span class="n">graphviz</span> <span class="n">doxygen</span> <span class="n">libtinfo</span><span class="o">-</span><span class="n">dev</span> <span class="n">zlib1g</span><span class="o">-</span><span class="n">dev</span> <span class="n">texinfo</span> <span class="n">unzip</span> <span class="n">device</span><span class="o">-</span><span class="n">tree</span><span class="o">-</span><span class="n">compiler</span> <span class="n">tree</span> <span class="n">g</span><span class="o">++</span>
 
 <span class="c1"># Optional (depending on configuration)</span>
-<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">ninja</span><span class="o">-</span><span class="n">build</span>
+<span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">ninja</span><span class="o">-</span><span class="n">build</span> <span class="n">flex</span> <span class="n">lsb</span><span class="o">-</span><span class="n">release</span> <span class="n">libelf</span><span class="o">-</span><span class="n">dev</span>
 </pre></div>
 </div>
 <p>Also make sure that your default Python is at least v3.7. If the <code class="docutils literal notranslate"><span class="pre">python</span></code> command is not available in your shell or points Python v2.7 check out <code class="docutils literal notranslate"><span class="pre">python-is-python3</span></code>.</p>
 <p><strong>Warning:</strong> It seems like the ETISS tool fails to compile if if find a version of LLVM 11 on your system which does not include Clang 11. The best workaround for now is to (if possible) remove those tools from your system: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">remove</span> <span class="pre">llvm-11*</span> <span class="pre">clang-11*</span></code> (See issue #1)</p>
-<p>Next, make sure to install all package dependencies into a fresh virtual Python environment</p>
+<p>Make sure to use a fresh virtual Python environment in the following steps.</p>
+<section id="install-release-from-pypi">
+<h5>Install Release from PyPI<a class="headerlink" href="#install-release-from-pypi" title="Link to this heading"></a></h5>
+<p><strong>Warning:</strong> As the PyPI package is not always up to date, it is currently recommented to use a self-build version of the package (as explained in the next section)</p>
+<p>To use the PIP package, run the following: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">mlonmcu</span></code> (Add <code class="docutils literal notranslate"><span class="pre">--user</span></code> if you are not using a virtual environment)</p>
+</section>
+</section>
+<section id="build-package-manually">
+<h4>Build Package manually<a class="headerlink" href="#build-package-manually" title="Link to this heading"></a></h4>
+<p>First, install all relevant dependencies:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>python -m venv .venv  # Feel free to choose a different directory or use a conda environment
 
 # Run this whenever your have updated the repository
 source .venv/bin/activate
-pip install -r requirements.txt
+
+# Environment-specific dependencies are installed later
 
 **Warning:** It is recommended to have at least version 3.20 of CMake installed for full compatibility!
 
-# Only if you want to use the provided python notebooks, as explained in  ./ipynb/README.md
-pip install -r ipynb/requirements.txt
-
-# Optional (only for development)
+# Install ptional dependecies (only for development)
 pip install -r requirements_dev.txt
 pip install -r docs/requirements.txt
+
+# Only if you want to use the provided python notebooks, as explained in  ./ipynb/README.md
+pip install -r ipynb/requirements.txt
 </pre></div>
 </div>
 <p>Then you should be able to install the <code class="docutils literal notranslate"><span class="pre">mlonmcu</span></code> python package like this</p>
@@ -185,8 +191,8 @@ pip install -r docs/requirements.txt
 </div>
 </section>
 <section id="docker-any-other-os">
-<h4>Docker (Any other OS)<a class="headerlink" href="#docker-any-other-os" title="Permalink to this headline"></a></h4>
-<p>See <span class="xref myst"><code class="docutils literal notranslate"><span class="pre">./docker/README.md</span></code></span> for more details.</p>
+<h4>Docker (Any other OS)<a class="headerlink" href="#docker-any-other-os" title="Link to this heading"></a></h4>
+<p>See <a class="reference external" href="https://github.com/tum-ei-eda/mlonmcu/blob/main/docker/README.md"><code class="docutils literal notranslate"><span class="pre">./docker/README.md</span></code></a> for more details.</p>
 <p>This repository ships three different types of docker images based on Debian:</p>
 <ul>
 <li><p>A minimal one with preinstalled software dependencies and python packages</p>
@@ -202,17 +208,14 @@ pip install -r docs/requirements.txt
 </section>
 </section>
 <section id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h3>
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h3>
 <p>Is is recommended to checkout the provided <a class="reference external" href="https://github.com/tum-ei-eda/mlonmcu/blob/main/ipynb/Demo.ipynb">Demo Jupyter Notebook</a> as it contains a end-to-end example which should help to understand the main concepts and methodology of the tool. The following paragraphs can be seen as a TL;DL version of the information in that Demo notebook.</p>
-<section id="using-the-command-line">
-<h4>Using the command line<a class="headerlink" href="#using-the-command-line" title="Permalink to this headline"></a></h4>
-<p>TODO</p>
-</section>
-<section id="using-the-python-api">
-<h4>Using the Python API<a class="headerlink" href="#using-the-python-api" title="Permalink to this headline"></a></h4>
-<p>TODO</p>
-<p>While some tools and features of this project work out of the box, some of them require setting up an environment where additional dependencies are installed.</p>
-<p>By default, this environment would be created intactively using the <code class="docutils literal notranslate"><span class="pre">mlonmcu</span> <span class="pre">init</span></code> command.</p>
+<p>While some tools and features of this project work out of the box, some of them require setting up an environment where additional dependencies are installed. This can be achived by creating a MLonMCU environment as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mlonmcu<span class="w"> </span>init
+</pre></div>
+</div>
+<p>Make sure to point the <code class="docutils literal notranslate"><span class="pre">MLONMCU_HOME</span></code> environment variable to the location of the previously initialied environment. (Alternative: use the <code class="docutils literal notranslate"><span class="pre">default</span></code> environment or <code class="docutils literal notranslate"><span class="pre">--home</span></code> argument on the command line)</p>
+<p>Next, generate a <code class="docutils literal notranslate"><span class="pre">requirements_addition.txt</span></code> file inside the environment directory using <code class="docutils literal notranslate"><span class="pre">mlonmcu</span> <span class="pre">setup</span> <span class="pre">-g</span></code> which now be installed by running <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">$MLONMCU_HOME/requirements_addition.txt</span></code> inside the virtual Python environment.</p>
 <p>To use the created environment in a python program, a <code class="docutils literal notranslate"><span class="pre">MlonMcuContext</span></code> needs to be created as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlonmcu.context</span>
 
@@ -220,30 +223,13 @@ pip install -r docs/requirements.txt
     <span class="k">pass</span>
 </pre></div>
 </div>
-<p>The following table shows which parts of <code class="docutils literal notranslate"><span class="pre">mlonmcu</span></code> require such an context as a prerequisite:</p>
-</section>
-</section>
-<section id="important-terms">
-<h3>Important terms<a class="headerlink" href="#important-terms" title="Permalink to this headline"></a></h3>
-<ul class="simple">
-<li><p>Context</p></li>
-<li><p>Environment</p></li>
-<li><p>Run</p></li>
-<li><p>Backend</p></li>
-<li><p>Feature</p></li>
-<li><p>Target</p></li>
-<li><p>(Flow)</p></li>
-<li><p>Framework</p></li>
-<li><p>Frontend</p></li>
-<li><p>Task</p></li>
-</ul>
-<p>TODO</p>
 </section>
 </section>
 <section id="development">
-<h2>Development<a class="headerlink" href="#development" title="Permalink to this headline"></a></h2>
+<h2>Development<a class="headerlink" href="#development" title="Link to this heading"></a></h2>
 <p>Make sure to first install the additonal set of development Python packages into your virtual environment:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements_dev</span><span class="o">.</span><span class="n">txt</span>  <span class="c1"># Building distributions and running tests</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements_all</span><span class="o">.</span><span class="n">txt</span>  <span class="c1"># Install packages for every component (instead of using mlonmcu setup -g)</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements_dev</span><span class="o">.</span><span class="n">txt</span>  <span class="c1"># Building distributions and running tests</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">docs</span><span class="o">/</span><span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>  <span class="c1"># For working with the documentation</span>
 </pre></div>
 </div>
@@ -251,25 +237,8 @@ pip install -r docs/requirements.txt
 <p>Coverage can be determined by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">coverage</span></code>. The latest coverage report (HTML) for the default branch can also be found as an artifact of the CI/CD workflow.</p>
 <p>Documentation is mainly generated automatically from doctrings (triggered via <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code>). It is also possible to include markdown files from the repo into the <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files found in the <a class="reference internal" href="docs.html"><span class="doc std std-doc"><code class="docutils literal notranslate"><span class="pre">docs/</span></code></span></a> directory. There is a GitHub workflow which publishes the documentation for the default branch to our <a class="reference external" href="https://tum-ei-eda.github.io/mlonmcu">GitHub Pages</a>.</p>
 <p>Regarding coding style, it is recommended to run <code class="docutils literal notranslate"><span class="pre">black</span></code> before every commit. The default line length should be given in the <code class="docutils literal notranslate"><span class="pre">setup.cfg</span></code> file.</p>
-<section id="future-work">
-<h3>Future Work<a class="headerlink" href="#future-work" title="Permalink to this headline"></a></h3>
-<ul class="simple">
-<li><p>[ ] Finish beta version <code class="docutils literal notranslate"><span class="pre">v0.1.0</span></code></p></li>
-<li><p>[ ] Open Source Release</p>
-<ul>
-<li><p>[ ] Make repository public</p></li>
-<li><p>[ ] Release python package</p></li>
-<li><p>[ ] Publish docs automatically to https://readthedocs.org</p></li>
-</ul>
-</li>
-</ul>
-</section>
-</section>
-<section id="credits">
-<h2>Credits<a class="headerlink" href="#credits" title="Permalink to this headline"></a></h2>
-<p>This is a research project proposed by the Chair of Design Automation of the Technical University of Munich.</p>
 <section id="developers">
-<h3>Developers<a class="headerlink" href="#developers" title="Permalink to this headline"></a></h3>
+<h3>Developers<a class="headerlink" href="#developers" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Rafael Stahl (TUM) [&#64;rafzi]</p>
 <ul>
@@ -284,13 +253,19 @@ pip install -r docs/requirements.txt
 </ul>
 </section>
 <section id="other">
-<h3>Other<a class="headerlink" href="#other" title="Permalink to this headline"></a></h3>
+<h3>Other<a class="headerlink" href="#other" title="Link to this heading"></a></h3>
 <p>This package was created with Cookiecutter_ and the <code class="docutils literal notranslate"><span class="pre">audreyr/cookiecutter-pypackage</span></code>_ project template. However most of the templates was manually changed to be in Markdown instead of reStructuredText.</p>
 <ul class="simple">
 <li><p><strong>Cookiecutter:</strong> https://github.com/audreyr/cookiecutter</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">audreyr/cookiecutter-pypackage</span></code>:</strong> https://github.com/audreyr/cookiecutter-pypackage</p></li>
 </ul>
 </section>
+</section>
+<section id="acknowledgment">
+<h2>Acknowledgment<a class="headerlink" href="#acknowledgment" title="Link to this heading"></a></h2>
+<img src="./BMBF_gefoerdert_2017_en.jpg" alt="drawing" height="75" align="left" >
+<p>This research is partially funded by the German Federal Ministry of Education and Research (BMBF) within
+the project <a class="reference external" href="https://www.edacentrum.de/scale4edge/">Scale4Edge</a> (grant number 16ME0465).</p>
 </section>
 </section>
 
